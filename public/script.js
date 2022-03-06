@@ -64,10 +64,49 @@ const addVideoStream = (video, stream) => {
   videoGrid.append(video);
 };
 
-const node = document.getElementById("chat_msg").value;
-console.log(node);
-node.addEventListener("keyup", function (event) {
-  if (event.key === "Enter") {
-    alert(node);
+let text = $("input");
+
+$("html").keydown(function (e) {
+  if (e.which == 13 && text.val().length != 0) {
+    console.log(text.val());
+    socket.emit("message", text.val());
+    text.val("");
   }
 });
+
+socket.on("createMessage", (message) => {
+  // console.log("server msg", message);
+  $("ul").append(`<li class="msgs"><b>user</b><br/>${message}</li>`);
+  scrollToBottom();
+});
+
+const scrollToBottom = () => {
+  var d = $(".right_chat_window");
+  d.scrollTop(d.prop("scrollHeight"));
+};
+
+const muteControl = () => {
+  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getAudioTracks()[0].enabled = false;
+    setUnmuteButton();
+  } else {
+    myVideoStream.getAudioTracks()[0].enabled = true;
+    setMuteButton();
+  }
+};
+
+const setMuteButton = () => {
+  const html = `
+    <i class="fas fa-microphone"></i><span>Mute</span>
+    `;
+
+  document.querySelector(".mute_button").innerHTML = html;
+};
+const setUnmuteButton = () => {
+  const html = `
+    <i class="unmute fas fa-microphone-slash"></i><span>Unmute</span>
+    `;
+
+  document.querySelector(".mute_button").innerHTML = html;
+};
