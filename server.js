@@ -25,8 +25,6 @@ app.get("/:room", (req, res) => {
   //   passsing the roomId to the ejs/frontend
 });
 
-server.listen(4000);
-
 io.on("connection", (socket) => {
   socket.on("joinRoom", (roomId, userId) => {
     // console.log("joined room");
@@ -41,3 +39,5 @@ io.on("connection", (socket) => {
     });
   });
 });
+
+server.listen(443);
