@@ -110,3 +110,29 @@ const setUnmuteButton = () => {
 
   document.querySelector(".mute_button").innerHTML = html;
 };
+
+const playControl = () => {
+  const enabled = myVideoStream.getVideoTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getVideoTracks()[0].enabled = false;
+    setStopButton();
+  } else {
+    myVideoStream.getVideoTracks()[0].enabled = true;
+    setPlayButton();
+  }
+};
+
+const setPlayButton = () => {
+  const html = `
+    <i class="fas fa-video"></i><span>Stop Video</span>
+    `;
+
+  document.querySelector(".play_button").innerHTML = html;
+};
+const setStopButton = () => {
+  const html = `
+    <i class="stop fas fa-video-slash"></i><span>Play Video</span>
+    `;
+
+  document.querySelector(".play_button").innerHTML = html;
+};

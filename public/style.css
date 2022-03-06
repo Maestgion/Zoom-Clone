@@ -108,3 +108,11 @@ video {
   color: white;
   list-style: none;
 }
+
+.unmute {
+  color: red;
+}
+
+.stop {
+  color: red;
+}
