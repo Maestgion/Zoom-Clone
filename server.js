@@ -40,4 +40,4 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(443);
+server.listen(1025);
